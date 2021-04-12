@@ -13,6 +13,7 @@ import com.google.android.libraries.places.api.model.Place
 
 class MapsViewModel(application: Application) : AndroidViewModel(application) {
 
+
     private val TAG = "MapsViewModel"
 
     private var bookmarkRepo: BookmarkRepo = BookmarkRepo(getApplication())

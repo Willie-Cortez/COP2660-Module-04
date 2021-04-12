@@ -2,31 +2,25 @@ package com.cortez.willie.placebook.adapter
 
 import android.app.Activity
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import com.cortez.willie.placebook.R
 import com.cortez.willie.placebook.ui.MapsActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 
-class BookmarkInfoWindowAdapter(context: Activity) : GoogleMap.InfoWindowAdapter {
-  private val contents: View = context.layoutInflater.inflate(
-    R.layout.content_bookmark_info, null)
+class BookmarkInfoWindowAdapter(context: Activity): GoogleMap.InfoWindowAdapter {
 
-  override fun getInfoWindow(marker: Marker): View? {
-    return null
-  }
+    private val binding = ContentBookmarkInfoBinding.inflate(context.layoutInflater)
 
-  override fun getInfoContents(marker: Marker): View? {
-    val titleView = contents.findViewById<TextView>(R.id.title)
-    titleView.text = marker.title ?: ""
+    override fun getInfoWindow(marker: Marker): View? {
+        return null
+    }
 
-    val phoneView = contents.findViewById<TextView>(R.id.phone)
-    phoneView.text = marker.snippet ?: ""
+    override fun getInfoContents(marker: Marker) : View?{
+        binding.title.text = marker.title ?: ""
+        binding.phone.text = marker.snippet ?: ""
+        val imageView = binding.photo
 
-    val imageView = contents.findViewById<ImageView>(R.id.photo)
-    imageView.setImageBitmap((marker.tag as MapsActivity.PlaceInfo).image)
+        imageView.setImageBitmap((marker.tag as MapsActivity.PlaceInfo).image)
 
-    return contents
-  }
+        return binding.root
+    }
 }
