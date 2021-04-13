@@ -2,6 +2,7 @@ package com.cortez.willie.placebook.adapter
 
 import android.app.Activity
 import android.view.View
+import com.cortez.willie.placebook.databinding.ContentBookmarkInfoBinding
 import com.cortez.willie.placebook.ui.MapsActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker

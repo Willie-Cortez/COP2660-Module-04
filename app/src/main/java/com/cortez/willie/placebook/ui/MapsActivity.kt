@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.cortez.willie.placebook.R
+import com.cortez.willie.placebook.adapter.BookmarkInfoWindowAdapter
 import com.cortez.willie.placebook.viewmodel.MapsViewModel
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -85,7 +86,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setupMapListeners() {
-        //mMap.setInfoWindowAdapter(BookmarkInfoWindowAdapter(this))
+        mMap.setInfoWindowAdapter(BookmarkInfoWindowAdapter(this))
         mMap.setOnPoiClickListener {
             displayPoi(it)
         }
@@ -132,10 +133,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             return
         }
         val photoRequest = FetchPhotoRequest.builder(photoMetadata as PhotoMetadata)
-            //.setMaxWidth(resources.getDimensionPixelSize(R.dimen.default_image_width))
-            //.setMaxHeight(resources.getDimensionPixelSize(R.dimen.default_image_height))
             .setMaxWidth(resources.getDimensionPixelSize(R.dimen.default_image_width))
             .setMaxHeight(resources.getDimensionPixelSize(R.dimen.default_image_height))
+//            .setMaxWidth(resources.getDimensionPixelSize(R.dimen.default_image_width))
+//            .setMaxHeight(resources.getDimensionPixelSize(R.dimen.default_image_height))
             .build()
         placesClient.fetchPhoto(photoRequest).addOnSuccessListener { fetchPhotoResponse ->
             val bitmap = fetchPhotoResponse.bitmap
@@ -175,7 +176,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun handleInfoWindowClick(marker: Marker) {
         val placeInfo = (marker.tag as PlaceInfo)
         if (placeInfo.place != null) {
-            //mapsViewModel.addBookmarkFromPlace(placeInfo.place, placeInfo.image)
+            mapsViewModel.addBookmarkFromPlace(placeInfo.place, placeInfo.image)
             GlobalScope.launch {
                 mapsViewModel.addBookmarkFromPlace(placeInfo.place, placeInfo.image)
             }
@@ -185,15 +186,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun createBookmarkMarkerObserver() {
-//        mapsViewModel.getBookmarkMarkerViews()?.observe(
-//            this, {
-//
-//                mMap.clear()
-//
-//                it?.let {
-//                    displayAllBookmarks(it)
-//                }
-//            })
+        mapsViewModel.getBookmarkMarkerViews()?.observe(
+            this, {
+
+                mMap.clear()
+
+                it?.let {
+                    displayAllBookmarks(it)
+                }
+            })
     }
 
     private fun displayAllBookmarks(bookmarks: List<MapsViewModel.BookmarkMarkerView>) {
