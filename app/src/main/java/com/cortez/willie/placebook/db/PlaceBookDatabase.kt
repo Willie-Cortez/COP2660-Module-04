@@ -10,6 +10,7 @@ import com.cortez.willie.placebook.model.Bookmark
 
 @Database(entities = arrayOf(Bookmark::class), version = 1)
 abstract class PlaceBookDatabase : RoomDatabase(){
+
     abstract fun bookmarkDao(): BookmarkDao
 
     companion object {
@@ -18,7 +19,10 @@ abstract class PlaceBookDatabase : RoomDatabase(){
 
         fun getInstance(context: Context): PlaceBookDatabase {
             if (instance == null) {
-                instance = Room.databaseBuilder(context.applicationContext, PlaceBookDatabase::class.java, "PlaceBook").build()
+                instance = Room.databaseBuilder(context.applicationContext,
+                    PlaceBookDatabase::class.java, "PlaceBook")
+                    .fallbackToDestructiveMigration()
+                    .build()
             }
             return instance as PlaceBookDatabase
         }

@@ -41,7 +41,7 @@ class BookmarkDetailsActivity : AppCompatActivity(),
 
         photoFile?.let { photoFile ->
             val photoUri = FileProvider.getUriForFile(this,
-                "com.raywenderlich.placebook.fileprovider",
+                "com.cortez.willie.placebook.fileprovider",
                 photoFile)
             val captureIntent =
                 Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -102,7 +102,7 @@ class BookmarkDetailsActivity : AppCompatActivity(),
                     val photoFile = photoFile ?: return
 
                     val uri = FileProvider.getUriForFile(this,
-                        "com.raywenderlich.placebook.fileprovider",
+                        "com.cortez.willie.placebook.fileprovider",
                         photoFile)
                     revokeUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
                     val image = getImageWithPath(photoFile.absolutePath)
