@@ -49,7 +49,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var placesClient: PlacesClient
 
-    private lateinit var mapsViewModel: MapsViewModel
+    //private lateinit var mapsViewModel: MapsViewModel
     private val mapsViewModel by viewModels<MapsViewModel>()
     private lateinit var bookmarkListAdapter: BookmarkListAdapter
     private var markers = HashMap<Long, Marker>()
