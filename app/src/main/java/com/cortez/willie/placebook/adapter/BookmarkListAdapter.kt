@@ -8,9 +8,14 @@ import com.cortez.willie.placebook.ui.MapsActivity
 import com.cortez.willie.placebook.viewmodel.MapsViewModel
 
 
-class BookmarkListAdapter(private var bookmarkData: List<MapsViewModel.BookmarkView>?, private val mapsActivity: MapsActivity) : RecyclerView.Adapter<BookmarkListAdapter.ViewHolder>() {
+class BookmarkListAdapter(
+    private var bookmarkData: List<MapsViewModel.BookmarkView>?,
+    private val mapsActivity: MapsActivity) :
+    RecyclerView.Adapter<BookmarkListAdapter.ViewHolder>() {
 
-    class ViewHolder(val binding: BookmarkItemBinding, private val mapsActivity: MapsActivity) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: BookmarkItemBinding,
+                     private val mapsActivity: MapsActivity) :
+        RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.root.setOnClickListener {
@@ -34,13 +39,14 @@ class BookmarkListAdapter(private var bookmarkData: List<MapsViewModel.BookmarkV
         return ViewHolder(binding, mapsActivity)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder,
+                                  position: Int) {
 
         val bookmarkData = bookmarkData ?: return
         val bookmarkViewData = bookmarkData[position]
 
         holder.binding.root.tag = bookmarkViewData
-        holder.binding.bookMarkerView = BookMarkerView
+        //holder.binding.bookmarkData = bookmarkViewData
         bookmarkViewData.categoryResourceId?.let {
             holder.binding.bookmarkIcon.setImageResource(it)
         }

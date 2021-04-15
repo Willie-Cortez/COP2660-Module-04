@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.cortez.willie.placebook.R
-import com.cortez.willie.placebook.databinding.ContentBookmarkInfoBinding
 import com.cortez.willie.placebook.ui.MapsActivity
 import com.cortez.willie.placebook.viewmodel.MapsViewModel
 import com.google.android.gms.maps.GoogleMap
@@ -13,7 +12,7 @@ import com.google.android.gms.maps.model.Marker
 
 class BookmarkInfoWindowAdapter(val context: Activity): GoogleMap.InfoWindowAdapter {
 
-    private val binding = ContentBookmarkInfoBinding.inflate(context.layoutInflater)
+    //rivate val binding = ContentBookmarkInfoBinding.inflate(context.layoutInflater)
 
     private val contents: View
 
@@ -41,9 +40,9 @@ class BookmarkInfoWindowAdapter(val context: Activity): GoogleMap.InfoWindowAdap
                         (marker.tag as MapsActivity.PlaceInfo).image)
             }
 
-            is MapsViewModel.BookmarkMarkerView -> {
+            is MapsViewModel.BookmarkView -> {
                 var bookMarkview = marker.tag as
-                        MapsViewModel.BookmarkMarkerView
+                        MapsViewModel.BookmarkView
                 // Set imageView bitmap here
                 imageView.setImageBitmap(bookMarkview.getImage(context))
             }

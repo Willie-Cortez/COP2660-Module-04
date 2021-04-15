@@ -49,7 +49,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var placesClient: PlacesClient
 
-    //private lateinit var mapsViewModel: MapsViewModel
+    private lateinit var mapsViewModel: MapsViewModel
     private val mapsViewModel by viewModels<MapsViewModel>()
     private lateinit var bookmarkListAdapter: BookmarkListAdapter
     private var markers = HashMap<Long, Marker>()
@@ -108,11 +108,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         when (requestCode) {
             AUTOCOMPLETE_REQUEST_CODE ->
-
                 if (resultCode == Activity.RESULT_OK && data != null) {
-
                     val place = Autocomplete.getPlaceFromIntent(data)
-
                     val location = Location("")
                     location.latitude = place.latLng?.latitude ?: 0.0
                     location.longitude = place.latLng?.longitude ?: 0.0
@@ -154,6 +151,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun displayPoi(pointOfInterest: PointOfInterest) {
+        showProgress()
         displayPoiGetPlaceStep(pointOfInterest)
     }
 
@@ -212,11 +210,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     private fun displayPoiDisplayStep(place: Place, photo: Bitmap?) {
-        val marker = mMap.addMarker(
-            MarkerOptions()
-                .position(place.latLng as LatLng)
-                .title(place.name)
-                .snippet(place.phoneNumber)
+        hideProgress()
+        val marker = mMap.addMarker(MarkerOptions()
+            .position(place.latLng as LatLng)
+            .title(place.name)
+            .snippet(place.phoneNumber)
         )
         marker?.tag = PlaceInfo(place, photo)
         marker?.showInfoWindow()
