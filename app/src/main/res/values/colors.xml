@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3748AC</color>
     <color name="colorPrimaryDark">#2A3784</color>
     <color name="colorAccent">#E3A60B</color>
+    <color name="purple_500">#6A1B0A</color>
+    <color name="purple_700">#8A18BA</color>
+    <color name="purple_200">#FF8A18BA</color>
+    <color name="white">#E8EAF6</color>
+    <color name="teal_200">#64B5F6</color>
+    <color name="teal_700">#90CAF9</color>
+    <color name="black">#FFFFFF</color>
 </resources>

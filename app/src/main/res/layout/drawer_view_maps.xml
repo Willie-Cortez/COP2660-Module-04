@@ -37,7 +37,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="raywenderlich.com" />
+            android:text="@string/com_cortez_willie" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
