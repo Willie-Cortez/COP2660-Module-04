@@ -6,9 +6,18 @@ import com.cortez.willie.placebook.db.BookmarkDao
 import com.cortez.willie.placebook.db.PlaceBookDatabase
 import com.cortez.willie.placebook.model.Bookmark
 
-class BookmarkRepo(context: Context) {
-    private var db = PlaceBookDatabase.getInstance(context)
+class BookmarkRepo(private val context: Context) {
+
+    private var db: PlaceBookDatabase = PlaceBookDatabase.getInstance(context)
     private var bookmarkDao: BookmarkDao = db.bookmarkDao()
+
+    fun updateBookmark(bookmark: Bookmark) {
+        bookmarkDao.updateBookmark(bookmark)
+    }
+
+    fun getBookmark(bookmarkId: Long): Bookmark {
+        return bookmarkDao.loadBookmark(bookmarkId)
+    }
 
     fun addBookmark(bookmark: Bookmark): Long? {
         val newId = bookmarkDao.insertBookmark(bookmark)
@@ -18,6 +27,11 @@ class BookmarkRepo(context: Context) {
 
     fun createBookmark(): Bookmark {
         return Bookmark()
+    }
+
+    fun getLiveBookmark(bookmarkId: Long): LiveData<Bookmark> {
+        val bookmark = bookmarkDao.loadLiveBookmark(bookmarkId)
+        return bookmark
     }
 
     val allBookmarks: LiveData<List<Bookmark>>
