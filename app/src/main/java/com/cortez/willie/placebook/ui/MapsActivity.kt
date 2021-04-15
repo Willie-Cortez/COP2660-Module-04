@@ -9,21 +9,21 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
-import android.widget.Toast
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException
-import com.google.android.gms.common.GooglePlayServicesRepairableException
-import com.google.android.gms.common.api.ApiException
 import com.cortez.willie.placebook.R
 import com.cortez.willie.placebook.adapter.BookmarkInfoWindowAdapter
 import com.cortez.willie.placebook.adapter.BookmarkListAdapter
 import com.cortez.willie.placebook.databinding.ActivityMapsBinding
 import com.cortez.willie.placebook.viewmodel.MapsViewModel
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.common.GooglePlayServicesRepairableException
+import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -42,6 +42,7 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
@@ -57,15 +58,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_maps)
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        databinding = ActivityMapsBinding.inflate(layoutInflater)
+        setContentView(databinding.root)
+
         val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+                .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         setupLocationClient()
-        setupPlacesClient()
         setupToolbar()
+        setupPlacesClient()
         setupNavigationDrawer()
     }
 
@@ -93,7 +95,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         setupMapListeners()
-        createBookmarkMarkerObserver()
+        createBookmarkObserver()
         getCurrentLocation()
     }
 
@@ -269,7 +271,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun createBookmarkObserver() {
         mapsViewModel.getBookmarkViews()?.observe(this, {
-            map.clear()
+            mMap.clear()
             markers.clear()
             it?.let {
                 displayAllBookmarks(it)
@@ -409,6 +411,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         const val EXTRA_BOOKMARK_ID = "com.raywenderlich.placebook.EXTRA_BOOKMARK_ID"
         private const val REQUEST_LOCATION = 1
         private const val TAG = "MapsActivity"
+        private const val AUTOCOMPLETE_REQUEST_CODE = 2
+
     }
 
 
