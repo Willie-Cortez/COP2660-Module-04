@@ -221,15 +221,16 @@ class BookmarkDetailsActivity : AppCompatActivity(),
             MapsActivity.Companion.EXTRA_BOOKMARK_ID, 0)
 
         bookmarkDetailsViewModel.getBookmark(bookmarkId)?.observe(
-            this, {
+            this
+        ) {
 
-                it?.let {
-                    bookmarkDetailsView = it
-                    databinding.bookmarkDetailsView = it
-                    populateImageView()
-                    populateCategoryList()
-                }
-            })
+            it?.let {
+                bookmarkDetailsView = it
+                databinding.bookmarkDetailsView = it
+                populateImageView()
+                populateCategoryList()
+            }
+        }
     }
 
     private fun setupToolbar() {

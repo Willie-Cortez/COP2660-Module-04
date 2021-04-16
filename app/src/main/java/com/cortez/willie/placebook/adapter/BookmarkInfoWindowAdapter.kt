@@ -14,12 +14,8 @@ class BookmarkInfoWindowAdapter(val context: Activity): GoogleMap.InfoWindowAdap
 
     //rivate val binding = ContentBookmarkInfoBinding.inflate(context.layoutInflater)
 
-    private val contents: View
-
-    init {
-        contents = context.layoutInflater.inflate(
-                R.layout.content_bookmark_info, null)
-    }
+    private val contents: View = context.layoutInflater.inflate(
+            R.layout.content_bookmark_info, null)
 
     override fun getInfoWindow(marker: Marker): View? {
         return null

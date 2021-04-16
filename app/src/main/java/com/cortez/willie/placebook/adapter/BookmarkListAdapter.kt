@@ -46,7 +46,7 @@ class BookmarkListAdapter(
         val bookmarkViewData = bookmarkData[position]
 
         holder.binding.root.tag = bookmarkViewData
-        //holder.binding.bookmarkData = bookmarkViewData
+        holder.binding.bookmarkData = bookmarkViewData
         bookmarkViewData.categoryResourceId?.let {
             holder.binding.bookmarkIcon.setImageResource(it)
         }

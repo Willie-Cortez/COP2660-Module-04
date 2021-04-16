@@ -268,14 +268,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     private fun createBookmarkObserver() {
-        mapsViewModel.getBookmarkViews()?.observe(this, {
+        mapsViewModel.getBookmarkViews()?.observe(this) {
             mMap.clear()
             markers.clear()
             it?.let {
                 displayAllBookmarks(it)
                 bookmarkListAdapter.setBookmarkData(it)
             }
-        })
+        }
     }
 
     private fun displayAllBookmarks(bookmarks: List<MapsViewModel.BookmarkView>) {
@@ -406,7 +406,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     companion object {
-        const val EXTRA_BOOKMARK_ID = "com.raywenderlich.placebook.EXTRA_BOOKMARK_ID"
+        const val EXTRA_BOOKMARK_ID = "com.cortez.willie.placebook.EXTRA_BOOKMARK_ID"
         private const val REQUEST_LOCATION = 1
         private const val TAG = "MapsActivity"
         private const val AUTOCOMPLETE_REQUEST_CODE = 2
